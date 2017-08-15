@@ -19,4 +19,11 @@ http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/cor
         <flow-ref name="sayHello" doc:name="Flow-ref to sayHello"/>
         <munit:assert-on-equals message=" Expected fname to conatin Dina, but found #[flowVars.fname] instead!!" expectedValue="#['Dina']" actualValue="#[flowVars.fname]" doc:name="Assert Equals: fname = 'Dina'"/>
     </munit:test>
+    <munit:before-test name="sayHello-test-suiteBefore_Test" description="Before tests actions">
+        <munit:set payload="#[]" doc:name="Set Message query param &quot;name&quot;">
+            <munit:inbound-properties>
+                <munit:inbound-property key="http.query.params" value="#[{'name' : 'Dina'}]"/>
+            </munit:inbound-properties>
+        </munit:set>
+    </munit:before-test>
 </mule>
