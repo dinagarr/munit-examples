@@ -3,7 +3,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mulesoft.training</groupId>
-	<artifactId>order-systems</artifactId>
+	<artifactId>order-systems-dr</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule</packaging>
 	<name>Mule order-systems Application</name>
@@ -16,10 +16,36 @@
     	<mule.tools.version>1.2</mule.tools.version>
 	<munit.version>1.3.4</munit.version>
     <mule.munit.support.version>3.8.4</mule.munit.support.version>
+    <uid>dina-ram</uid>
+    <pwd>xxx</pwd>
     </properties>
 
 	<build>
 		<plugins>
+		<plugin>
+    <groupId>org.mule.tools.maven</groupId>
+    <artifactId>mule-maven-plugin</artifactId>
+    <version>2.0</version>
+    <configuration>
+        <deploymentType>cloudhub</deploymentType>
+        <muleVersion>${mule.version}</muleVersion> 
+        <username>${uid}</username>
+        <password>${pwd}</password>
+     <workerType>Micro</workerType>
+        <redeploy>true</redeploy>
+        <environment>Sandbox</environment>
+    </configuration>
+    <executions>
+        <execution>
+            <id>deploy</id>
+            <phase>deploy</phase>
+            <goals>
+                <goal>deploy</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+		
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-app-maven-plugin</artifactId>
